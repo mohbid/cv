@@ -10,18 +10,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy-950:#060e1a;
-    --navy-900:#0a1930;
-    --navy-800:#0f2340;
-    --navy-700:#16305a;
-    --navy-600:#1d3d70;
-    --gold:#c79a3e;
-    --gold-light:#e3bf6f;
-    --text-light:#eef2f8;
-    --text-dim:#9fb0c8;
-    --text-dimmer:#6d7f9c;
-    --border:rgba(199,154,62,0.18);
-    --card:rgba(255,255,255,0.03);
+    --navy-950:#000000;
+    --navy-900:#08080b;
+    --navy-800:#0f0f14;
+    --navy-700:#17171f;
+    --navy-600:#1f1f2b;
+    --gold:#8b5cf6;
+    --gold-light:#b39dfb;
+    --text-light:#f4f4f7;
+    --text-dim:#a3a3b3;
+    --text-dimmer:#6f6f80;
+    --border:rgba(139,92,246,0.22);
+    --card:rgba(255,255,255,0.035);
     --maxw:1080px;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -115,7 +115,7 @@
     border:1px solid transparent;
   }
   .btn-primary{background:var(--gold);color:var(--navy-950);}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(199,154,62,0.5);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(139,92,246,0.5);}
   .btn-ghost{border-color:var(--border);color:var(--text-light);background:rgba(255,255,255,0.02);}
   .btn-ghost:hover{border-color:var(--gold);color:var(--gold-light);transform:translateY(-2px);}
 
@@ -145,7 +145,7 @@
     position:relative;width:min(380px,85vw);aspect-ratio:4/5;border-radius:24px;
     overflow:hidden;
     border:1px solid var(--border);
-    box-shadow:0 30px 70px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(199,154,62,0.1);
+    box-shadow:0 30px 70px -20px rgba(0,0,0,0.7), 0 0 0 1px rgba(139,92,246,0.15);
   }
   .bottom-photo-frame img{
     width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block;
@@ -153,7 +153,7 @@
   }
   .bottom-photo-frame::after{
     content:'';position:absolute;inset:0;
-    background:linear-gradient(200deg, rgba(199,154,62,0.14), transparent 40%);
+    background:linear-gradient(200deg, rgba(139,92,246,0.18), transparent 40%);
     pointer-events:none;
   }
 
@@ -198,7 +198,7 @@
     position:absolute;left:-32px;top:4px;width:13px;height:13px;border-radius:50%;
     background:var(--navy-950);border:2px solid var(--gold);
   }
-  .tl-item.current .tl-dot{background:var(--gold);box-shadow:0 0 0 4px rgba(199,154,62,0.18);}
+  .tl-item.current .tl-dot{background:var(--gold);box-shadow:0 0 0 4px rgba(139,92,246,0.22);}
   .tl-role{font-family:'Sora',sans-serif;font-size:1.08rem;font-weight:700;color:var(--text-light);}
   .tl-meta{color:var(--gold-light);font-size:0.88rem;font-weight:600;margin:4px 0 2px;}
   .tl-dates{color:var(--text-dimmer);font-size:0.82rem;margin-bottom:10px;}
@@ -216,7 +216,7 @@
   .project-card h3{font-size:1.08rem;color:var(--text-light);margin-bottom:8px;}
   .project-card p{color:var(--text-dim);font-size:0.9rem;flex-grow:1;margin-bottom:16px;}
   .project-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
-  .project-tags span{font-size:0.72rem;padding:3px 9px;border-radius:6px;background:rgba(199,154,62,0.1);color:var(--gold-light);}
+  .project-tags span{font-size:0.72rem;padding:3px 9px;border-radius:6px;background:rgba(139,92,246,0.14);color:var(--gold-light);}
   .project-link{display:inline-flex;align-items:center;gap:6px;color:var(--gold);font-size:0.86rem;font-weight:600;}
   .project-link svg{width:14px;height:14px;transition:transform .2s;}
   .project-card:hover .project-link svg{transform:translate(2px,-2px);}
@@ -231,7 +231,7 @@
 
   /* Contact */
   .contact-box{
-    background:linear-gradient(135deg, rgba(199,154,62,0.09), rgba(29,61,112,0.25));
+    background:linear-gradient(135deg, rgba(139,92,246,0.12), rgba(20,10,35,0.4));
     border:1px solid var(--border);border-radius:20px;
     padding:56px 44px;text-align:center;
   }
@@ -555,7 +555,7 @@
 
     const props = {
       cellSize: 64,
-      color: '#c79a3e',
+      color: '#b39dfb',
       radius: 160,
       falloff: 'smooth',
       holdTime: 350,
@@ -960,6 +960,7 @@
       }
     });
     const mesh = new Mesh(gl, { geometry, program });
+    window.__prism = { program, gl };
 
     const resize = () => {
       const w = container.clientWidth || 1;
