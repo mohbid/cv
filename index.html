@@ -960,7 +960,6 @@
       }
     });
     const mesh = new Mesh(gl, { geometry, program });
-    window.__prism = { program, gl };
 
     const resize = () => {
       const w = container.clientWidth || 1;
@@ -1095,8 +1094,8 @@
         height: 3.2,
         baseWidth: 5.5,
         scale: 4.4,
-        hueShift: 4.6,
-        colorFrequency: 0.4,
+        hueShift: 5.7,
+        colorFrequency: 0.5,
         noise: 0.25,
         glow: 0.35,
         bloom: 0.4,
