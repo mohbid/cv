@@ -960,6 +960,7 @@
       }
     });
     const mesh = new Mesh(gl, { geometry, program });
+    window.__prism = { program, gl };
 
     const resize = () => {
       const w = container.clientWidth || 1;
