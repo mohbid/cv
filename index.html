@@ -84,9 +84,11 @@
 
   /* Hero */
   .hero{
-    min-height:92vh;display:flex;flex-direction:column;justify-content:center;
+    min-height:92vh;display:flex;align-items:center;justify-content:space-between;
+    gap:48px;flex-wrap:wrap;
     padding-top:140px;padding-bottom:60px;
   }
+  .hero-text{flex:1 1 480px;min-width:0;}
   .eyebrow{
     display:inline-flex;align-items:center;gap:8px;
     color:var(--gold-light);font-size:0.8rem;font-weight:600;
@@ -138,20 +140,22 @@
   }
   .brand{display:inline-flex;align-items:center;}
 
-  /* Big framed photo in its own section at the bottom of the page */
-  .photo-section{padding-top:20px;padding-bottom:100px;text-align:center;}
-  .bottom-photo-wrap{display:flex;justify-content:center;}
-  .bottom-photo-frame{
+  /* Big framed photo, right side of the hero */
+  .hero-photo-wrap{
+    flex-shrink:0;margin:0 auto;
+    opacity:0;animation:fadeUp .7s ease .3s forwards;
+  }
+  .hero-photo-frame{
     position:relative;width:min(380px,85vw);aspect-ratio:4/5;border-radius:24px;
     overflow:hidden;
     border:1px solid var(--border);
     box-shadow:0 30px 70px -20px rgba(0,0,0,0.7), 0 0 0 1px rgba(139,92,246,0.15);
   }
-  .bottom-photo-frame img{
+  .hero-photo-frame img{
     width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block;
     filter:saturate(1.05) contrast(1.02);
   }
-  .bottom-photo-frame::after{
+  .hero-photo-frame::after{
     content:'';position:absolute;inset:0;
     background:linear-gradient(200deg, rgba(139,92,246,0.18), transparent 40%);
     pointer-events:none;
@@ -256,7 +260,8 @@
     .nav-links.open{transform:translateX(0);}
     .nav-toggle{display:block;}
     section{padding:70px 22px;}
-    .hero{padding-top:120px;}
+    .hero{padding-top:120px;flex-direction:column;text-align:center;}
+    .hero-text{text-align:left;}
   }
 </style>
 </head>
@@ -284,18 +289,25 @@
 </nav>
 
 <section class="hero" id="home">
-  <div class="eyebrow">Newcastle upon Tyne, UK — Open to new opportunities</div>
-  <h1>Abid Rihad<br>Freelance <span class="accent">Software Developer</span></h1>
-  <p class="lead">I build full-stack web applications with React, Next.js, C# and Firebase — four self-built projects, live and in production, from booking platforms to internal dashboards.</p>
-  <div class="hero-actions">
-    <a class="btn btn-primary" href="mailto:abdmoh2900@gmail.com">Get in touch</a>
-    <a class="btn btn-ghost" href="https://www.linkedin.com/in/abid-rihad-88337b283" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="btn btn-ghost" href="https://github.com/mohbid" target="_blank" rel="noopener">GitHub</a>
+  <div class="hero-text">
+    <div class="eyebrow">Newcastle upon Tyne, UK — Open to new opportunities</div>
+    <h1>Abid Rihad<br>Freelance <span class="accent">Software Developer</span></h1>
+    <p class="lead">I build full-stack web applications with React, Next.js, C# and Firebase — four self-built projects, live and in production, from booking platforms to internal dashboards.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="mailto:abdmoh2900@gmail.com">Get in touch</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/abid-rihad-88337b283" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/mohbid" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="hero-meta">
+      <div><strong>4</strong>Live projects shipped</div>
+      <div><strong>3 yrs</strong>Front-end support, Virgin Money</div>
+      <div><strong>15</strong>Core technologies</div>
+    </div>
   </div>
-  <div class="hero-meta">
-    <div><strong>4</strong>Live projects shipped</div>
-    <div><strong>3 yrs</strong>Front-end support, Virgin Money</div>
-    <div><strong>15</strong>Core technologies</div>
+  <div class="hero-photo-wrap">
+    <div class="hero-photo-frame">
+      <img src="profile_photo.jpg" alt="Abid Rihad" loading="lazy">
+    </div>
   </div>
 </section>
 
@@ -527,14 +539,6 @@
       <a class="btn btn-primary" href="mailto:abdmoh2900@gmail.com">abdmoh2900@gmail.com</a>
       <a class="btn btn-ghost" href="https://www.linkedin.com/in/abid-rihad-88337b283" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn-ghost" href="https://github.com/mohbid" target="_blank" rel="noopener">GitHub</a>
-    </div>
-  </div>
-</section>
-
-<section class="photo-section" id="photo">
-  <div class="bottom-photo-wrap reveal">
-    <div class="bottom-photo-frame">
-      <img src="profile_photo.jpg" alt="Abid Rihad" loading="lazy">
     </div>
   </div>
 </section>
