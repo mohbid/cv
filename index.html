@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abid Rihad — Software Developer</title>
+<meta name="description" content="Abid Rihad — Freelance Software Developer. React, Next.js, C#, Firebase.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#060e1a;
+    --navy-900:#0a1930;
+    --navy-800:#0f2340;
+    --navy-700:#16305a;
+    --navy-600:#1d3d70;
+    --gold:#c79a3e;
+    --gold-light:#e3bf6f;
+    --text-light:#eef2f8;
+    --text-dim:#9fb0c8;
+    --text-dimmer:#6d7f9c;
+    --border:rgba(199,154,62,0.18);
+    --card:rgba(255,255,255,0.03);
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:var(--navy-950);
+    color:var(--text-light);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:'Sora',sans-serif;letter-spacing:-0.01em;}
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--gold);color:var(--navy-950);}
+
+  /* Background flourish */
+  body::before{
+    content:'';
+    position:fixed;top:-20%;right:-10%;
+    width:60vw;height:60vw;
+    background:radial-gradient(circle, rgba(199,154,62,0.10) 0%, transparent 70%);
+    pointer-events:none;
+    z-index:0;
+  }
+  body::after{
+    content:'';
+    position:fixed;bottom:-20%;left:-15%;
+    width:50vw;height:50vw;
+    background:radial-gradient(circle, rgba(29,61,112,0.35) 0%, transparent 70%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* Cursor-reactive grid overlay */
+  .cursor-grid{
+    position:fixed;inset:0;
+    width:100%;height:100%;
+    z-index:0;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .cursor-grid__canvas{
+    display:block;width:100%;height:100%;
+  }
+
+  /* Nav */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(6,14,26,0.75);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{
+    max-width:var(--maxw);margin:0 auto;padding:16px 28px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{font-family:'Sora',sans-serif;font-weight:700;font-size:1.05rem;color:var(--text-light);}
+  .brand span{color:var(--gold);}
+  .nav-links{display:flex;gap:30px;list-style:none;}
+  .nav-links a{
+    font-size:0.88rem;font-weight:500;color:var(--text-dim);
+    transition:color .2s;position:relative;
+  }
+  .nav-links a:hover{color:var(--gold-light);}
+  .nav-toggle{display:none;background:none;border:none;color:var(--text-light);font-size:1.4rem;cursor:pointer;}
+
+  section{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:100px 28px;}
+
+  /* Hero */
+  .hero{
+    min-height:92vh;display:flex;flex-direction:column;justify-content:center;
+    padding-top:140px;padding-bottom:60px;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    color:var(--gold-light);font-size:0.8rem;font-weight:600;
+    letter-spacing:0.08em;text-transform:uppercase;margin-bottom:22px;
+    opacity:0;animation:fadeUp .7s ease forwards;
+  }
+  .eyebrow::before{content:'';width:26px;height:1px;background:var(--gold);}
+  .hero h1{
+    font-size:clamp(2.6rem,6vw,4.4rem);font-weight:800;color:var(--text-light);
+    line-height:1.08;margin-bottom:22px;
+    opacity:0;animation:fadeUp .7s ease .1s forwards;
+  }
+  .hero h1 .accent{color:var(--gold);}
+  .hero p.lead{
+    font-size:1.15rem;color:var(--text-dim);max-width:640px;margin-bottom:34px;
+    opacity:0;animation:fadeUp .7s ease .22s forwards;
+  }
+  .hero-actions{
+    display:flex;gap:14px;flex-wrap:wrap;
+    opacity:0;animation:fadeUp .7s ease .34s forwards;
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 24px;border-radius:8px;font-weight:600;font-size:0.92rem;
+    transition:transform .2s, box-shadow .2s, background .2s, border-color .2s;
+    border:1px solid transparent;
+  }
+  .btn-primary{background:var(--gold);color:var(--navy-950);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(199,154,62,0.5);}
+  .btn-ghost{border-color:var(--border);color:var(--text-light);background:rgba(255,255,255,0.02);}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-light);transform:translateY(-2px);}
+
+  .hero-meta{
+    display:flex;gap:28px;flex-wrap:wrap;margin-top:56px;
+    opacity:0;animation:fadeUp .7s ease .46s forwards;
+  }
+  .hero-meta div{font-size:0.85rem;color:var(--text-dimmer);}
+  .hero-meta strong{display:block;color:var(--text-light);font-size:1rem;font-family:'Sora',sans-serif;margin-bottom:2px;}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+  /* Small avatar next to the name in the nav */
+  .nav-avatar{
+    width:32px;height:32px;border-radius:50%;
+    object-fit:cover;object-position:50% 22%;
+    border:1.5px solid var(--gold);
+    margin-right:9px;flex-shrink:0;
+    vertical-align:middle;
+  }
+  .brand{display:inline-flex;align-items:center;}
+
+  /* Larger avatar sitting above the hero name, on its own line */
+  .hero-avatar{
+    width:clamp(96px, 11vw, 132px);
+    height:clamp(96px, 11vw, 132px);
+    border-radius:50%;
+    object-fit:cover;object-position:50% 24%;
+    border:2px solid var(--gold);
+    box-shadow:0 16px 40px -14px rgba(0,0,0,0.55), 0 0 0 6px rgba(199,154,62,0.08);
+    display:block;
+    margin-bottom:22px;
+    opacity:0;animation:fadeUp .7s ease .04s forwards;
+  }
+
+  /* Section headings */
+  .sec-head{margin-bottom:48px;}
+  .sec-head .eyebrow{margin-bottom:10px;opacity:1;animation:none;}
+  .sec-head h2{font-size:clamp(1.7rem,3.5vw,2.3rem);color:var(--text-light);font-weight:700;}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* About */
+  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:56px;align-items:start;}
+  .about-text p{color:var(--text-dim);font-size:1rem;margin-bottom:18px;}
+  .about-text p strong{color:var(--text-light);font-weight:600;}
+  .facts{display:flex;flex-direction:column;gap:20px;}
+  .fact{
+    background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;
+  }
+  .fact .label{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--gold-light);font-weight:600;margin-bottom:6px;}
+  .fact .value{color:var(--text-light);font-size:0.95rem;}
+
+  /* Skills */
+  .skills-grid{display:flex;flex-wrap:wrap;gap:10px;}
+  .skill-pill{
+    padding:9px 16px;border-radius:999px;
+    background:var(--card);border:1px solid var(--border);
+    font-size:0.87rem;font-weight:500;color:var(--text-light);
+    transition:border-color .2s, color .2s, transform .2s;
+  }
+  .skill-pill:hover{border-color:var(--gold);color:var(--gold-light);transform:translateY(-2px);}
+
+  /* Experience timeline */
+  .timeline{position:relative;padding-left:32px;}
+  .timeline::before{
+    content:'';position:absolute;left:6px;top:6px;bottom:6px;width:1px;
+    background:linear-gradient(var(--border), var(--border));
+  }
+  .tl-item{position:relative;padding-bottom:40px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-dot{
+    position:absolute;left:-32px;top:4px;width:13px;height:13px;border-radius:50%;
+    background:var(--navy-950);border:2px solid var(--gold);
+  }
+  .tl-item.current .tl-dot{background:var(--gold);box-shadow:0 0 0 4px rgba(199,154,62,0.18);}
+  .tl-role{font-family:'Sora',sans-serif;font-size:1.08rem;font-weight:700;color:var(--text-light);}
+  .tl-meta{color:var(--gold-light);font-size:0.88rem;font-weight:600;margin:4px 0 2px;}
+  .tl-dates{color:var(--text-dimmer);font-size:0.82rem;margin-bottom:10px;}
+  .tl-item ul{padding-left:18px;color:var(--text-dim);font-size:0.93rem;}
+  .tl-item li{margin-bottom:5px;}
+
+  /* Projects */
+  .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
+  .project-card{
+    background:var(--card);border:1px solid var(--border);border-radius:14px;
+    padding:26px;display:flex;flex-direction:column;height:100%;
+    transition:border-color .25s, transform .25s, background .25s;
+  }
+  .project-card:hover{border-color:var(--gold);transform:translateY(-4px);background:rgba(255,255,255,0.045);}
+  .project-card h3{font-size:1.08rem;color:var(--text-light);margin-bottom:8px;}
+  .project-card p{color:var(--text-dim);font-size:0.9rem;flex-grow:1;margin-bottom:16px;}
+  .project-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+  .project-tags span{font-size:0.72rem;padding:3px 9px;border-radius:6px;background:rgba(199,154,62,0.1);color:var(--gold-light);}
+  .project-link{display:inline-flex;align-items:center;gap:6px;color:var(--gold);font-size:0.86rem;font-weight:600;}
+  .project-link svg{width:14px;height:14px;transition:transform .2s;}
+  .project-card:hover .project-link svg{transform:translate(2px,-2px);}
+
+  /* Education */
+  .edu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  .edu-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;}
+  .edu-card h3{font-size:1rem;color:var(--text-light);margin-bottom:4px;}
+  .edu-card .edu-meta{color:var(--gold-light);font-size:0.85rem;font-weight:600;margin-bottom:2px;}
+  .edu-card .edu-dates{color:var(--text-dimmer);font-size:0.8rem;margin-bottom:10px;}
+  .edu-card .edu-grades{color:var(--text-dim);font-size:0.85rem;}
+
+  /* Contact */
+  .contact-box{
+    background:linear-gradient(135deg, rgba(199,154,62,0.09), rgba(29,61,112,0.25));
+    border:1px solid var(--border);border-radius:20px;
+    padding:56px 44px;text-align:center;
+  }
+  .contact-box h2{font-size:clamp(1.8rem,4vw,2.5rem);margin-bottom:14px;}
+  .contact-box p{color:var(--text-dim);max-width:520px;margin:0 auto 32px;}
+  .contact-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+
+  footer{
+    text-align:center;padding:36px 28px 48px;color:var(--text-dimmer);font-size:0.82rem;
+    position:relative;z-index:1;
+  }
+
+  @media (max-width:800px){
+    .about-grid{grid-template-columns:1fr;}
+    .projects-grid{grid-template-columns:1fr;}
+    .edu-grid{grid-template-columns:1fr;}
+    .nav-links{
+      position:fixed;top:60px;left:0;right:0;bottom:0;
+      background:var(--navy-950);flex-direction:column;padding:32px 28px;gap:22px;
+      transform:translateX(100%);transition:transform .3s ease;
+    }
+    .nav-links.open{transform:translateX(0);}
+    .nav-toggle{display:block;}
+    section{padding:70px 22px;}
+    .hero{padding-top:120px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-grid" id="cursorGrid" aria-hidden="true">
+  <canvas class="cursor-grid__canvas" id="cursorGridCanvas"></canvas>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand"><img class="nav-avatar" src="profile_photo.jpg" alt="Abid Rihad">Abid <span>Rihad</span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <img class="hero-avatar" src="profile_photo.jpg" alt="Abid Rihad">
+  <div class="eyebrow">Newcastle upon Tyne, UK — Available for software developer roles</div>
+  <h1>Abid Rihad<br>Freelance <span class="accent">Software Developer</span></h1>
+  <p class="lead">I build full-stack web applications with React, Next.js, C# and Firebase — four self-built projects, live and in production, from booking platforms to internal dashboards.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="mailto:abdmoh2900@gmail.com">Get in touch</a>
+    <a class="btn btn-ghost" href="https://www.linkedin.com/in/abid-rihad-88337b283" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="btn btn-ghost" href="https://github.com/mohbid" target="_blank" rel="noopener">GitHub</a>
+  </div>
+  <div class="hero-meta">
+    <div><strong>4</strong>Live projects shipped</div>
+    <div><strong>3 yrs</strong>Front-end support, Virgin Money</div>
+    <div><strong>15</strong>Core technologies</div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="sec-head reveal">
+    <div class="eyebrow">About</div>
+    <h2>A developer who ships</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I'm a <strong>freelance software developer</strong> with four self-built full-stack projects using React, Next.js, C#, Firebase and REST APIs — including a live gym management platform with admin authentication and booking.</p>
+      <p>I'm currently completing a full-stack bootcamp alongside an <strong>Access to Higher Education Diploma in Computer Science</strong>, while working three years troubleshooting front-end issues for banking app users at Virgin Money.</p>
+      <p>Before that, a few years in customer-facing roles taught me to stay calm under pressure, communicate clearly, and solve problems fast — habits that carry into how I approach every project. I'm looking for a software developer role to put all of that to use.</p>
+    </div>
+    <div class="facts reveal">
+      <div class="fact"><div class="label">Location</div><div class="value">Newcastle upon Tyne, UK</div></div>
+      <div class="fact"><div class="label">Email</div><div class="value">abdmoh2900@gmail.com</div></div>
+      <div class="fact"><div class="label">Phone</div><div class="value">+44 7460 516845</div></div>
+      <div class="fact"><div class="label">Looking for</div><div class="value">Software Developer roles</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Skills</div>
+    <h2>Technologies I work with</h2>
+  </div>
+  <div class="skills-grid reveal">
+    <span class="skill-pill">React</span>
+    <span class="skill-pill">Next.js</span>
+    <span class="skill-pill">TypeScript</span>
+    <span class="skill-pill">JavaScript</span>
+    <span class="skill-pill">C#</span>
+    <span class="skill-pill">Node.js</span>
+    <span class="skill-pill">Python</span>
+    <span class="skill-pill">REST APIs</span>
+    <span class="skill-pill">SQL</span>
+    <span class="skill-pill">NoSQL</span>
+    <span class="skill-pill">Firebase</span>
+    <span class="skill-pill">Microsoft Azure</span>
+    <span class="skill-pill">HTML</span>
+    <span class="skill-pill">CSS</span>
+    <span class="skill-pill">Tailwind CSS</span>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Experience</div>
+    <h2>Where I've worked</h2>
+  </div>
+  <div class="timeline">
+
+    <div class="tl-item current reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-role">Digital Experience Assistant</div>
+      <div class="tl-meta">Virgin Money · Newcastle upon Tyne</div>
+      <div class="tl-dates">January 2025 – Present</div>
+      <ul>
+        <li>Support customers with the Virgin Money mobile app and online banking platform, resolving queries on account access, payments and general functionality.</li>
+        <li>Diagnose front-end issues reported by users, tracing root causes to authentication failures, UI bugs and application logic errors, and escalating or resolving as appropriate.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item current reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-role">Freelance Software Developer</div>
+      <div class="tl-meta">TT Solutions · Newcastle upon Tyne</div>
+      <div class="tl-dates">March 2023 – Present</div>
+      <ul>
+        <li>Integrate third-party APIs to extend client application functionality.</li>
+        <li>Deliver end-to-end builds for client projects, from UI to backend integration.</li>
+        <li>Design and manage SQL and NoSQL databases, including query optimisation.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-role">Customer Service Advisor</div>
+      <div class="tl-meta">Foundever · Newcastle upon Tyne</div>
+      <div class="tl-dates">September 2024 – December 2024</div>
+      <ul>
+        <li>Handled customer enquiries on products, orders and troubleshooting, resolving issues on first contact where possible.</li>
+        <li>Explained product usage and warranty terms clearly to reduce repeat contacts and improve customer confidence.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-role">Customer Experience Agent – PIP Reassessments</div>
+      <div class="tl-meta">G4S · Wath upon Dearne</div>
+      <div class="tl-dates">November 2023 – September 2024</div>
+      <ul>
+        <li>Supported claimants through the PIP application and assessment process, resolving queries and clarifying next steps.</li>
+        <li>Guided claimants through required documentation and explained their rights within the process.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-role">Retentions &amp; Sales Advisor – Virgin Media Campaign</div>
+      <div class="tl-meta">Foundever · Newcastle upon Tyne</div>
+      <div class="tl-dates">July 2023 – October 2023</div>
+      <ul>
+        <li>Handled inbound enquiries for the Virgin Media campaign, resolving issues and advising on products and services.</li>
+        <li>Worked to retention and sales targets across a high-volume call environment.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-role">1st Line IT Support</div>
+      <div class="tl-meta">Norman ICT · Newcastle upon Tyne</div>
+      <div class="tl-dates">July 2022 – September 2022</div>
+      <ul>
+        <li>Provided out-of-hours IT support for students across several UK universities, resolving account access issues and general enquiries.</li>
+        <li>Unlocked and restored student access to university platforms using Microsoft Azure account administration.</li>
+        <li>Supported students using Panopto to upload lecture recordings and submit assignments, troubleshooting upload failures and access issues.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-role">Business Data Analyst</div>
+      <div class="tl-meta">EY · Newcastle upon Tyne</div>
+      <div class="tl-dates">August 2018 – August 2019</div>
+      <ul>
+        <li>Worked as a Data Analyst on the Smart Futures Programme, collecting, cleaning and analysing large datasets in Excel.</li>
+        <li>Collaborated with teams across the business to support strategic planning and decision-making.</li>
+        <li>Shadowed an accountant and EY analysts to gain exposure to financial and data analysis, and completed a Level 1 BTEC in Teamwork and Leadership.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section id="projects">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Projects</div>
+    <h2>Live, self-built applications</h2>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <h3>RMA Academy — Gym &amp; Fight Club Management Platform</h3>
+      <p>Full-stack booking platform for a martial arts gym: live timetable, class RSVPs with capacity/waitlisting, admin dashboard, announcements feed.</p>
+      <div class="project-tags"><span>Next.js</span><span>TypeScript</span><span>React</span><span>Firebase</span><span>Tailwind CSS</span></div>
+      <a class="project-link" href="https://rabani-mma-academy.vercel.app" target="_blank" rel="noopener">
+        rabani-mma-academy.vercel.app
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+      </a>
+    </div>
+
+    <div class="project-card reveal">
+      <h3>Student Attendance Tracker</h3>
+      <p>Full-stack attendance tracking platform with a React front end and C# REST API backend, Firebase authentication distinguishing staff/student accounts, and real-time updates.</p>
+      <div class="project-tags"><span>React</span><span>C#</span><span>REST APIs</span><span>Firebase</span></div>
+      <a class="project-link" href="https://newcastle-attendance-abid.web.app" target="_blank" rel="noopener">
+        newcastle-attendance-abid.web.app
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+      </a>
+    </div>
+
+    <div class="project-card reveal">
+      <h3>Property Listing Platform</h3>
+      <p>Full-stack property listing platform for a UK estate agency: search/filtering, save-and-compare shortlisting, agent "list with us" form, valuation tool.</p>
+      <div class="project-tags"><span>React</span><span>HTML</span><span>CSS</span><span>REST APIs</span><span>Firebase</span></div>
+      <a class="project-link" href="https://keyline-solutions.web.app" target="_blank" rel="noopener">
+        keyline-solutions.web.app
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+      </a>
+    </div>
+
+    <div class="project-card reveal">
+      <h3>Central Employee Portal</h3>
+      <p>Full-stack internal dashboard with role-based admin/employee accounts, task tracking, announcements feed, events calendar, and a categorised resources library.</p>
+      <div class="project-tags"><span>React</span><span>C#</span><span>REST APIs</span><span>Firebase</span></div>
+      <a class="project-link" href="https://employee-portal-black-phi.vercel.app" target="_blank" rel="noopener">
+        employee-portal-black-phi.vercel.app
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<section id="education">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Education</div>
+    <h2>Study &amp; qualifications</h2>
+  </div>
+  <div class="edu-grid">
+
+    <div class="edu-card reveal">
+      <h3>Access to Higher Education Diploma, Computer Science</h3>
+      <div class="edu-meta">Cambridge Online Education / AIM</div>
+      <div class="edu-dates">2026 – Present</div>
+    </div>
+
+    <div class="edu-card reveal">
+      <h3>Full-Stack Software Engineer Bootcamp</h3>
+      <div class="edu-meta">Code Academy</div>
+      <div class="edu-dates">January 2026 – May 2026</div>
+    </div>
+
+    <div class="edu-card reveal">
+      <h3>A Level</h3>
+      <div class="edu-meta">Gosforth Academy</div>
+      <div class="edu-dates">2017 – 2019</div>
+      <div class="edu-grades">Business Studies (C), Geography (C), Core Maths (C)</div>
+    </div>
+
+    <div class="edu-card reveal">
+      <h3>GCSEs &amp; BTEC Level 2</h3>
+      <div class="edu-meta">Gosforth Academy</div>
+      <div class="edu-dates">2015 – 2016</div>
+      <div class="edu-grades">English Lang (C), Maths (B), Dual Science (B), Geography (B), Fine Art (C); BTEC Eng (Merit); ECDL/IT (A)</div>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-box reveal">
+    <h2>Let's work together</h2>
+    <p>Open to software developer roles and freelance projects. Feel free to reach out — I usually reply within a day.</p>
+    <div class="contact-links">
+      <a class="btn btn-primary" href="mailto:abdmoh2900@gmail.com">abdmoh2900@gmail.com</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/abid-rihad-88337b283" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/mohbid" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Abid Rihad — Newcastle upon Tyne, UK
+</footer>
+
+<script>
+  // ---- CursorGrid: vanilla-JS port of the React Bits CursorGrid component ----
+  // Same canvas logic as the React version, adapted to mount on a fixed
+  // full-viewport overlay and listen on window (so it lights up over the
+  // whole page without blocking clicks on real content underneath).
+  (function initCursorGrid(){
+    const container = document.getElementById('cursorGrid');
+    const canvas = document.getElementById('cursorGridCanvas');
+    if (!container || !canvas) return;
+
+    const props = {
+      cellSize: 64,
+      color: '#c79a3e',
+      radius: 160,
+      falloff: 'smooth',
+      holdTime: 350,
+      fadeDuration: 900,
+      lineWidth: 1,
+      maxOpacity: 0.9,
+      fillOpacity: 0,
+      gridOpacity: 0,
+      cellRadius: 6,
+      clickPulse: true,
+      pulseSpeed: 650
+    };
+
+    const FALLOFF_CURVES = {
+      linear: t => t,
+      smooth: t => t * t * (3 - 2 * t),
+      sharp: t => t * t * t
+    };
+    const hexToRgb = hex => {
+      const h = hex.replace('#', '');
+      const v = h.length === 3 ? h.split('').map(c => c + c).join('') : h;
+      const num = parseInt(v.slice(0, 6), 16);
+      return [(num >> 16) & 255, (num >> 8) & 255, num & 255];
+    };
+
+    const ctx = canvas.getContext('2d');
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    let cols = 0, rows = 0, offX = 0, offY = 0;
+    let alphas = new Float32Array(0);
+    let touched = new Float64Array(0);
+    let w = 0, h = 0;
+    const pulses = [];
+    let raf = 0;
+    let running = false;
+    let lastFrame = 0;
+
+    const rebuild = () => {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = Math.max(1, Math.round(w * dpr));
+      canvas.height = Math.max(1, Math.round(h * dpr));
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cols = Math.ceil(w / props.cellSize) + 1;
+      rows = Math.ceil(h / props.cellSize) + 1;
+      offX = (w - cols * props.cellSize) / 2;
+      offY = (h - rows * props.cellSize) / 2;
+      alphas = new Float32Array(cols * rows);
+      touched = new Float64Array(cols * rows);
+    };
+
+    const cellCenter = i => {
+      const cx = offX + (i % cols) * props.cellSize + props.cellSize / 2;
+      const cy = offY + Math.floor(i / cols) * props.cellSize + props.cellSize / 2;
+      return [cx, cy];
+    };
+
+    const energize = (x, y, boost) => {
+      const r = Math.max(props.radius, 1);
+      const ease = FALLOFF_CURVES[props.falloff] ?? FALLOFF_CURVES.linear;
+      const now = performance.now();
+      const minCol = Math.max(0, Math.floor((x - r - offX) / props.cellSize));
+      const maxCol = Math.min(cols - 1, Math.floor((x + r - offX) / props.cellSize));
+      const minRow = Math.max(0, Math.floor((y - r - offY) / props.cellSize));
+      const maxRow = Math.min(rows - 1, Math.floor((y + r - offY) / props.cellSize));
+      for (let cRow = minRow; cRow <= maxRow; cRow++) {
+        for (let cCol = minCol; cCol <= maxCol; cCol++) {
+          const i = cRow * cols + cCol;
+          const [cx, cy] = cellCenter(i);
+          const dist = Math.hypot(cx - x, cy - y);
+          if (dist > r) continue;
+          const level = ease(1 - dist / r) * props.maxOpacity * (boost ?? 1);
+          if (level > alphas[i]) {
+            alphas[i] = level;
+            touched[i] = now;
+          } else if (level > 0) {
+            touched[i] = now;
+          }
+        }
+      }
+    };
+
+    const draw = now => {
+      const dt = Math.min(now - lastFrame, 50);
+      lastFrame = now;
+      ctx.clearRect(0, 0, w, h);
+      const [cr, cg, cb] = hexToRgb(props.color);
+
+      if (props.gridOpacity > 0) {
+        ctx.strokeStyle = `rgba(${cr}, ${cg}, ${cb}, ${props.gridOpacity})`;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        for (let cCol = 0; cCol <= cols; cCol++) {
+          const x = Math.round(offX + cCol * props.cellSize) + 0.5;
+          ctx.moveTo(x, 0); ctx.lineTo(x, h);
+        }
+        for (let cRow = 0; cRow <= rows; cRow++) {
+          const y = Math.round(offY + cRow * props.cellSize) + 0.5;
+          ctx.moveTo(0, y); ctx.lineTo(w, y);
+        }
+        ctx.stroke();
+      }
+
+      for (let pi = pulses.length - 1; pi >= 0; pi--) {
+        const pulse = pulses[pi];
+        const age = (now - pulse.t0) / 1000;
+        const ringR = age * props.pulseSpeed;
+        if (ringR > Math.hypot(w, h)) { pulses.splice(pi, 1); continue; }
+        const band = props.cellSize;
+        const minCol = Math.max(0, Math.floor((pulse.x - ringR - band - offX) / props.cellSize));
+        const maxCol = Math.min(cols - 1, Math.floor((pulse.x + ringR + band - offX) / props.cellSize));
+        const minRow = Math.max(0, Math.floor((pulse.y - ringR - band - offY) / props.cellSize));
+        const maxRow = Math.min(rows - 1, Math.floor((pulse.y + ringR + band - offY) / props.cellSize));
+        for (let cRow = minRow; cRow <= maxRow; cRow++) {
+          for (let cCol = minCol; cCol <= maxCol; cCol++) {
+            const i = cRow * cols + cCol;
+            const [cx, cy] = cellCenter(i);
+            const dist = Math.hypot(cx - pulse.x, cy - pulse.y);
+            if (Math.abs(dist - ringR) < band / 2 && props.maxOpacity > alphas[i]) {
+              alphas[i] = props.maxOpacity;
+              touched[i] = now;
+            }
+          }
+        }
+      }
+
+      let anyVisible = pulses.length > 0;
+      const fadeStep = dt / Math.max(props.fadeDuration, 16);
+      const half = props.cellSize / 2;
+      for (let i = 0; i < alphas.length; i++) {
+        let a = alphas[i];
+        if (a <= 0) continue;
+        if (now - touched[i] > props.holdTime) {
+          a = Math.max(0, a - fadeStep);
+          alphas[i] = a;
+          if (a <= 0) continue;
+        }
+        anyVisible = true;
+        const [cx, cy] = cellCenter(i);
+        const gradient = ctx.createRadialGradient(cx, cy, half * 0.1, cx, cy, props.cellSize);
+        gradient.addColorStop(0, `rgba(${cr}, ${cg}, ${cb}, ${a})`);
+        gradient.addColorStop(1, `rgba(${cr}, ${cg}, ${cb}, 0)`);
+        const x = cx - half + 0.5;
+        const y = cy - half + 0.5;
+        const s = props.cellSize - 1;
+        ctx.beginPath();
+        if (props.cellRadius > 0 && ctx.roundRect) {
+          ctx.roundRect(x, y, s, s, props.cellRadius);
+        } else {
+          ctx.rect(x, y, s, s);
+        }
+        if (props.fillOpacity > 0) {
+          ctx.fillStyle = `rgba(${cr}, ${cg}, ${cb}, ${a * props.fillOpacity})`;
+          ctx.fill();
+        }
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = props.lineWidth;
+        ctx.stroke();
+      }
+
+      if (anyVisible) {
+        raf = requestAnimationFrame(draw);
+      } else {
+        running = false;
+        if (props.gridOpacity <= 0) ctx.clearRect(0, 0, w, h);
+      }
+    };
+
+    const wake = () => {
+      if (running) return;
+      running = true;
+      lastFrame = performance.now();
+      raf = requestAnimationFrame(draw);
+    };
+
+    const onPointerMove = e => { energize(e.clientX, e.clientY); wake(); };
+    const onPointerDown = e => {
+      if (!props.clickPulse) return;
+      pulses.push({ x: e.clientX, y: e.clientY, t0: performance.now() });
+      wake();
+    };
+
+    let resizeTimer;
+    const onResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => { rebuild(); wake(); }, 100);
+    };
+
+    rebuild();
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    window.addEventListener('pointerdown', onPointerDown, { passive: true });
+    window.addEventListener('resize', onResize);
+  })();
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
