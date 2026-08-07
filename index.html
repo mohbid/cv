@@ -190,6 +190,20 @@
   }
   .skill-pill:hover{border-color:var(--gold);color:var(--gold-light);transform:translateY(-2px);}
 
+  /* Certifications */
+  .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;}
+  .cert-card{
+    background:var(--card);border:1px solid var(--border);border-radius:12px;
+    padding:16px 18px;display:flex;flex-direction:column;gap:2px;
+    transition:border-color .2s, transform .2s, background .2s;
+  }
+  .cert-card:hover{border-color:var(--gold);transform:translateY(-3px);background:rgba(255,255,255,0.045);}
+  .cert-card .cert-name{font-weight:600;color:var(--text-light);font-size:0.95rem;}
+  .cert-card .cert-issuer{color:var(--text-dimmer);font-size:0.78rem;margin-bottom:6px;}
+  .cert-card .cert-link{display:inline-flex;align-items:center;gap:5px;color:var(--gold);font-size:0.8rem;font-weight:600;}
+  .cert-card .cert-link svg{width:12px;height:12px;transition:transform .2s;}
+  .cert-card:hover .cert-link svg{transform:translate(2px,-2px);}
+
   /* Experience timeline */
   .timeline{position:relative;padding-left:32px;}
   .timeline::before{
@@ -279,6 +293,7 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#certifications">Certifications</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#education">Education</a></li>
@@ -352,6 +367,79 @@
     <span class="skill-pill">HTML</span>
     <span class="skill-pill">CSS</span>
     <span class="skill-pill">Tailwind CSS</span>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Certifications</div>
+    <h2>Verified on HackerRank</h2>
+  </div>
+  <div class="cert-grid reveal">
+    <div class="cert-card">
+      <div class="cert-name">React (Basic)</div>
+      <div class="cert-issuer">HackerRank</div>
+      <a class="cert-link" href="https://www.hackerrank.com/certificates/1ba933591cc4" target="_blank" rel="noopener">
+        Show credential
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+      </a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">JavaScript (Intermediate)</div>
+      <div class="cert-issuer">HackerRank</div>
+      <a class="cert-link" href="https://www.hackerrank.com/certificates/b52a4769b877" target="_blank" rel="noopener">
+        Show credential
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+      </a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">Node.js (Intermediate)</div>
+      <div class="cert-issuer">HackerRank</div>
+      <a class="cert-link" href="https://www.hackerrank.com/certificates/220e2df80106" target="_blank" rel="noopener">
+        Show credential
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+      </a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">REST API (Intermediate)</div>
+      <div class="cert-issuer">HackerRank</div>
+      <a class="cert-link" href="https://www.hackerrank.com/certificates/522bc6a9ba3a" target="_blank" rel="noopener">
+        Show credential
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+      </a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">SQL (Advanced)</div>
+      <div class="cert-issuer">HackerRank</div>
+      <a class="cert-link" href="https://www.hackerrank.com/certificates/7f8309b29aa1" target="_blank" rel="noopener">
+        Show credential
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+      </a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">SQL (Intermediate)</div>
+      <div class="cert-issuer">HackerRank</div>
+      <a class="cert-link" href="https://www.hackerrank.com/certificates/5e0d7e95c36e" target="_blank" rel="noopener">
+        Show credential
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+      </a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">SQL (Basic)</div>
+      <div class="cert-issuer">HackerRank</div>
+      <a class="cert-link" href="https://www.hackerrank.com/certificates/7a7505ce7304" target="_blank" rel="noopener">
+        Show credential
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+      </a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">C# (Basic)</div>
+      <div class="cert-issuer">HackerRank</div>
+      <a class="cert-link" href="https://www.hackerrank.com/certificates/9ee9cad6c863" target="_blank" rel="noopener">
+        Show credential
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+      </a>
+    </div>
   </div>
 </section>
 
